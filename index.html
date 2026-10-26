@@ -145,6 +145,9 @@ section.door{padding-block:88px 24px;scroll-margin-top:64px}
 .mini b{font-family:var(--display);font-weight:500;font-size:14px}
 .mini span{font-size:13px;color:var(--muted)}
 .mini .where{font-family:var(--mono);font-size:11.5px;color:var(--accent-ink);margin-top:4px}
+.graph{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px;font-family:var(--mono);font-size:12px}
+.graph span{padding:3px 8px;border-radius:6px;background:var(--raised);border:1px solid var(--line)}
+.graph i{font-style:normal;color:var(--accent-ink)}
 .stat{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 12px}
 .stat b{font-family:var(--display);font-weight:700;font-size:26px;color:var(--accent-ink);letter-spacing:-.01em}
 .stat span{color:var(--muted);font-size:14px}
@@ -292,6 +295,25 @@ footer p{margin:0;color:var(--muted)}
             <li>Driven by a pooled VFX system to avoid spawn spikes</li>
           </ul>
           <div class="needs">Needs: a 5 sec clip of the dust and debris</div>
+        </div>
+      </article>
+
+      <article class="item">
+        <figure class="media" style="margin:0">
+          <img src="img/ti-level.jpg" alt="Torch It! desert level with flat toon-shaded rocks, palms and a burning campfire" loading="lazy">
+          <figcaption>Torch It! Every surface uses the same toon shader.</figcaption>
+        </figure>
+        <div class="notes">
+          <h3>Toon shading for a whole game</h3>
+          <p class="game">TORCH IT! · SHADER GRAPH</p>
+          <p>A caveman carries the last flame home, so the world needed to read like a picture book. I built one unlit toon shader for the whole game, then lit and graded each level by hand.</p>
+          <div class="graph" role="img" aria-label="Shader graph: normal dot light direction, clamped at zero, floored into bands, clamped to shadow brightness, multiplied by the texture"><span>N · −L</span><i>→</i><span>max 0</span><i>→</i><span>floor into bands</span><i>→</i><span>max shadow</span><i>→</i><span>× texture</span></div>
+          <ul>
+            <li>Light quantised into flat bands, with a shadow-brightness floor so dark sides keep their colour</li>
+            <li>Unlit, so it stays cheap with lots of foliage on screen</li>
+            <li>Lighting and post-processing pass for all four levels</li>
+          </ul>
+          <div class="chips"><span class="chip">Shader Graph</span><span class="chip">URP</span><span class="chip">Post-processing</span></div>
         </div>
       </article>
 
