@@ -301,19 +301,21 @@ footer p{margin:0;color:var(--muted)}
       <article class="item">
         <figure class="media" style="margin:0">
           <img src="img/ti-level.jpg" alt="Torch It! desert level with flat toon-shaded rocks, palms and a burning campfire" loading="lazy">
-          <figcaption>Torch It! Every surface uses the same toon shader.</figcaption>
+          <figcaption>Torch It! Toon shader on every surface, plus my campfire VFX.</figcaption>
         </figure>
         <div class="notes">
-          <h3>Toon shading for a whole game</h3>
+          <h3>Toon shading and VFX for a whole game</h3>
           <p class="game">TORCH IT! · SHADER GRAPH</p>
-          <p>A caveman carries the last flame home, so the world needed to read like a picture book. I built one unlit toon shader for the whole game, then lit and graded each level by hand.</p>
+          <p>A caveman carries the last flame home, so the world needed to read like a picture book. I built one unlit toon shader for the whole game, lit and graded each level by hand, and made all the VFX.</p>
           <div class="graph" role="img" aria-label="Shader graph: normal dot light direction, clamped at zero, floored into bands, clamped to shadow brightness, multiplied by the texture"><span>N · −L</span><i>→</i><span>max 0</span><i>→</i><span>floor into bands</span><i>→</i><span>max shadow</span><i>→</i><span>× texture</span></div>
           <ul>
             <li>Light quantised into flat bands, with a shadow-brightness floor so dark sides keep their colour</li>
             <li>Unlit, so it stays cheap with lots of foliage on screen</li>
             <li>Lighting and post-processing pass for all four levels</li>
+            <li>All VFX: cartoon fire built from custom mesh particles and an additive material, wind gusts, lightning strikes, walking and landing dust</li>
           </ul>
-          <div class="chips"><span class="chip">Shader Graph</span><span class="chip">URP</span><span class="chip">Post-processing</span></div>
+          <div class="chips"><span class="chip">Shader Graph</span><span class="chip">URP</span><span class="chip">Particle System</span><span class="chip">Post-processing</span></div>
+          <div class="needs">Needs: a 5 sec clip of the fire, wind and lightning</div>
         </div>
       </article>
 
