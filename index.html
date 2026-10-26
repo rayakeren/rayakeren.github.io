@@ -138,6 +138,16 @@ section.door{padding-block:88px 24px;scroll-margin-top:64px}
 .card b{display:block;font-family:var(--display);font-weight:500;font-size:15px}
 .card span{display:block;font-size:13px;color:var(--muted)}
 .card .award{color:var(--accent-ink);font-family:var(--mono);font-size:12px;margin-top:6px}
+.more-head{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:36px 0 12px}
+.more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;color:var(--fg);text-decoration:none;min-width:0}
+.mini:hover{border-color:var(--accent)}
+.mini b{font-family:var(--display);font-weight:500;font-size:14px}
+.mini span{font-size:13px;color:var(--muted)}
+.mini .where{font-family:var(--mono);font-size:11.5px;color:var(--accent-ink);margin-top:4px}
+.stat{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.stat b{font-family:var(--display);font-weight:700;font-size:26px;color:var(--accent-ink);letter-spacing:-.01em}
+.stat span{color:var(--muted);font-size:14px}
 
 footer{padding-block:88px 64px}
 footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-top:1px solid var(--line);padding-top:40px}
@@ -154,6 +164,7 @@ footer p{margin:0;color:var(--muted)}
   .ach .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
   .ach div{border-bottom:1px solid var(--line)}
   .games{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .more{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow-row{grid-template-columns:1fr;gap:6px}
   .flow-row .arrow{padding:4px 0}
   .door-head{grid-template-columns:1fr}
@@ -224,15 +235,15 @@ footer p{margin:0;color:var(--muted)}
 
       <article class="item">
         <figure class="media" style="margin:0">
-          <div class="ba" id="ba-lm">
-            <div class="ba-before" aria-hidden="true">Unlit capture goes here</div>
-            <img src="img/lm-lit.jpg" alt="Little Mayor bedroom scene with baked lighting" style="clip-path:inset(0 0 0 var(--pos))">
+          <div class="ba" id="ba-lm" style="aspect-ratio:2/1">
+            <img src="img/lm-before.jpg" alt="Little Mayor bedroom before the lighting pass: flat, even light">
+            <img src="img/lm-after.jpg" alt="Little Mayor bedroom after the lighting pass: warm sunlight through the window and softer shadows" style="clip-path:inset(0 0 0 var(--pos))">
             <span class="ba-label l">BEFORE</span><span class="ba-label r">AFTER</span>
             <span class="ba-line"></span>
             <label for="ba-lm-range" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Compare before and after lighting</label>
             <input type="range" id="ba-lm-range" min="0" max="100" value="50">
           </div>
-          <figcaption>Drag to compare. Little Mayor, gameplay scene.</figcaption>
+          <figcaption>Drag to compare. Little Mayor's bedroom, before and after the lighting pass.</figcaption>
         </figure>
         <div class="notes">
           <h3>Bedroom lighting rig</h3>
@@ -244,7 +255,6 @@ footer p{margin:0;color:var(--muted)}
             <li>Kept cheap enough for the WebGL demo build</li>
           </ul>
           <div class="chips"><span class="chip">URP</span><span class="chip">Baked GI</span><span class="chip">Post-processing</span></div>
-          <div class="needs">Needs: an unlit or before capture of this view</div>
         </div>
       </article>
 
@@ -293,6 +303,7 @@ footer p{margin:0;color:var(--muted)}
         <div class="notes">
           <h3>Mobile performance pass</h3>
           <p class="game">ZERO ONE PROTOCOL · PC + MOBILE</p>
+          <p class="stat"><b>~25 → 60 fps</b><span>on mid-range Android</span></p>
           <p>The PC version's neon lighting had to survive on phones without losing the look.</p>
           <ul>
             <li>Occlusion culling and optimized level geometry across all levels</li>
@@ -300,7 +311,6 @@ footer p{margin:0;color:var(--muted)}
             <li>Device-tier quality settings, mobile shadows off, Addressables for content</li>
           </ul>
           <div class="chips"><span class="chip">Lightmaps</span><span class="chip">Occlusion</span><span class="chip">Addressables</span></div>
-          <div class="needs">Needs: fps or draw-call numbers, before and after</div>
         </div>
       </article>
 
@@ -491,6 +501,15 @@ async def ingest_events(request: Request):
         <a class="card" href="https://a-fair-studio.itch.io/wing-it"><img src="img/cover-wing-it.jpg" alt="WING-IT cover" loading="lazy"><div><b>WING-IT</b><span>Boss-rush shoot 'em up</span><span class="award">1st + Best Visual · GIMERSIA 2025</span></div></a>
         <a class="card" href="https://a-fair-studio.itch.io"><img src="img/cover-zero-one.jpg" alt="Zero One Protocol capsule art" loading="lazy"><div><b>Zero One Protocol</b><span>Co-op logic puzzler, Steam + mobile</span><span class="award">Finalist · GEMASTIK XVIII</span></div></a>
         <a class="card" href="https://a-fair-studio.itch.io/ice-tea-tycoon"><img src="img/cover-ice-tea-tycoon.jpg" alt="Ice Tea Tycoon cover" loading="lazy"><div><b>Ice Tea Tycoon</b><span>Street tea business sim</span><span class="award">1st · KMIPN VII 2025</span></div></a>
+      </div>
+      <p class="more-head">Also playable</p>
+      <div class="more">
+        <a class="mini" href="https://a-fair-studio.itch.io/logic-shield"><b>Logic Shield</b><span>Co-op logic-gate puzzle platformer</span><span class="where">Top 6 · Gameseed 2025</span></a>
+        <a class="mini" href="https://a-fair-studio.itch.io/torch-it"><b>Torch It!</b><span>Keep the last flame alive on the way home</span><span class="where">A FAIR Studio · itch.io</span></a>
+        <a class="mini" href="https://a-fair-studio.itch.io/sekolah-budi"><b>Sekolah Budi</b><span>Educational game about Pancasila values</span><span class="where">A FAIR Studio · itch.io</span></a>
+        <a class="mini" href="https://rayarekeren.itch.io/press-space-at-this-exact-time"><b>Press Space at This Exact Time</b><span>Timing game with a smug host. Solo project</span><span class="where">Solo · itch.io</span></a>
+        <a class="mini" href="https://rayarekeren.itch.io/adams-apple"><b>Adam's Apple</b><span>One bite flips the world upside down</span><span class="where">Solo · itch.io</span></a>
+        <a class="mini" href="https://rayarekeren.itch.io/sokoban-sokobanan"><b>Sokoban-Sokobanan</b><span>Box-pushing puzzler, course project</span><span class="where">Solo · itch.io</span></a>
       </div>
     </div>
   </section>
