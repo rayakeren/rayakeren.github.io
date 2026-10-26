@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Ray Ramadan Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Muhammad Raya Ramadan (Ray): technical artist and gameplay programmer, co-founder of A FAIR Studio.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one long scroll, three "doors" (tech art, gameplay, backend) reachable by anchor; each breakdown = media left, notes right; stacks on phones. */
+:root{
+  --bg:#141116; --surface:#1C1820; --raised:#241F29; --line:#332C38;
+  --fg:#F5EEF3; --muted:#A99FAC; --accent:#FF69B4; --accent-ink:#FF8FC6; --accent-soft:rgba(255,105,180,.14);
+  --code-bg:#0F0D11; --c-kw:#FF8FC6; --c-str:#9DE0B4; --c-com:#7D7482; --c-type:#8FC8FF; --c-num:#FFC98F;
+  --display:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --body:"Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  --radius:14px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){ :root:not([data-theme="dark"]){
+  --bg:#FBF7FA; --surface:#FFFFFF; --raised:#F6EEF3; --line:#E9DCE4;
+  --fg:#1B161A; --muted:#62575F; --accent:#FF69B4; --accent-ink:#C2185B; --accent-soft:rgba(255,105,180,.13);
+  --code-bg:#F7F0F4; --c-kw:#C2185B; --c-str:#1E7A44; --c-com:#8A7E87; --c-type:#1F5FA8; --c-num:#A35A00;
+  color-scheme:light; } }
+:root[data-theme="light"]{
+  --bg:#FBF7FA; --surface:#FFFFFF; --raised:#F6EEF3; --line:#E9DCE4;
+  --fg:#1B161A; --muted:#62575F; --accent:#FF69B4; --accent-ink:#C2185B; --accent-soft:rgba(255,105,180,.13);
+  --code-bg:#F7F0F4; --c-kw:#C2185B; --c-str:#1E7A44; --c-com:#8A7E87; --c-type:#1F5FA8; --c-num:#A35A00;
+  color-scheme:light; }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent-ink);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+img{display:block;max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+
+/* Top bar */
+.bar{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.02em;color:var(--fg);text-decoration:none}
+.mark span{color:var(--accent)}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{font-family:var(--mono);font-size:13px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:999px;border:1px solid transparent}
+.nav a:hover{color:var(--fg);border-color:var(--line)}
+
+/* Hero */
+.hero{padding-block:72px 48px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:48px;align-items:end}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);margin:0 0 18px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,6.4vw,76px);line-height:.98;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h1 .soft{color:var(--muted);font-weight:500}
+.lede{font-size:clamp(17px,1.6vw,20px);max-width:58ch;color:var(--fg);margin:24px 0 0}
+.lede em{font-style:normal;color:var(--accent-ink)}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#1B0A13;font-weight:500}
+.photo{position:relative}
+.photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius);border:1px solid var(--line)}
+.photo figcaption{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+
+/* Achievements strip */
+.ach{border-block:1px solid var(--line);background:var(--surface)}
+.ach .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0}
+.ach div{padding:18px 16px;border-right:1px solid var(--line);min-width:0}
+.ach div:last-child{border-right:0}
+.ach b{display:block;font-family:var(--display);font-weight:700;font-size:14px;line-height:1.3}
+.ach span{font-size:13px;color:var(--muted)}
+
+/* Sections */
+section.door{padding-block:88px 24px;scroll-margin-top:64px}
+.door-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:40px}
+.door-head h2{font-family:var(--display);font-weight:700;font-size:clamp(28px,3.6vw,44px);line-height:1.05;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.door-head p{margin:10px 0 0;color:var(--muted);max-width:60ch}
+.door-head .tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+.item{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:36px;align-items:start;padding-block:28px}
+.item + .item{border-top:1px dashed var(--line)}
+.item h3{font-family:var(--display);font-weight:500;font-size:22px;line-height:1.2;margin:0 0 4px;text-wrap:balance}
+.item .game{font-family:var(--mono);font-size:12.5px;color:var(--accent-ink);margin:0 0 14px;letter-spacing:.04em}
+.item p{margin:0 0 12px;max-width:62ch}
+.item ul{margin:0 0 14px;padding-left:18px}
+.item li{margin-bottom:4px}
+.item li::marker{color:var(--accent)}
+.notes{min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{font-family:var(--mono);font-size:12px;padding:3px 9px;border-radius:999px;background:var(--raised);color:var(--muted);border:1px solid var(--line)}
+.needs{display:inline-flex;gap:6px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--accent-ink);border:1px dashed var(--accent);border-radius:8px;padding:4px 9px;margin-top:10px;background:var(--accent-soft)}
+
+.media{min-width:0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.media img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.media figcaption{font-family:var(--mono);font-size:12px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
+.placeholder{aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:24px;background:repeating-linear-gradient(135deg,var(--surface) 0 14px,var(--raised) 14px 28px);color:var(--muted);font-family:var(--mono);font-size:13px}
+
+/* Before/after slider */
+.ba{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surface);--pos:50%}
+.ba > img, .ba > .ba-before{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba-before{clip-path:inset(0 calc(100% - var(--pos)) 0 0);display:grid;place-items:center;text-align:center;padding:24px;background:repeating-linear-gradient(135deg,#2a2430 0 14px,#221d27 14px 28px);color:#CFC4D2;font-family:var(--mono);font-size:13px}
+.ba-line{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:var(--accent);transform:translateX(-1px);pointer-events:none}
+.ba-line::after{content:"";position:absolute;top:50%;left:50%;width:30px;height:30px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);box-shadow:0 0 0 4px rgba(0,0,0,.25)}
+.ba-label{position:absolute;top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;padding:3px 8px;border-radius:6px;background:rgba(0,0,0,.55);color:#fff;pointer-events:none}
+.ba-label.l{left:12px}.ba-label.r{right:12px}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+
+/* Code */
+.code{margin:0;background:var(--code-bg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.code-head{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12px;color:var(--muted);padding:9px 14px;border-bottom:1px solid var(--line)}
+.code pre{margin:0;padding:16px 18px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.6;color:var(--fg);tab-size:4}
+.hljs-keyword,.hljs-built_in,.hljs-literal{color:var(--c-kw)}
+.hljs-string{color:var(--c-str)}
+.hljs-comment{color:var(--c-com);font-style:italic}
+.hljs-type,.hljs-title,.hljs-title.class_,.hljs-title.function_{color:var(--c-type)}
+.hljs-number{color:var(--c-num)}
+
+/* Diagram */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;align-items:stretch;padding:18px;background:var(--surface)}
+.node{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg);min-width:0}
+.node b{display:block;font-family:var(--display);font-weight:500;font-size:13px;margin-bottom:6px}
+.node span{display:block;font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.5}
+.node.hot{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.arrow{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;padding:0 4px}
+.flow-row{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1.3fr) 54px minmax(0,1fr);align-items:stretch;padding:18px;background:var(--surface);gap:0}
+.stack{display:flex;flex-direction:column;gap:8px}
+
+/* Games */
+.games{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;color:var(--fg);text-decoration:none;min-width:0}
+.card:hover{border-color:var(--accent)}
+.card img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.card div{padding:12px 14px 14px}
+.card b{display:block;font-family:var(--display);font-weight:500;font-size:15px}
+.card span{display:block;font-size:13px;color:var(--muted)}
+.card .award{color:var(--accent-ink);font-family:var(--mono);font-size:12px;margin-top:6px}
+
+footer{padding-block:88px 64px}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-top:1px solid var(--line);padding-top:40px}
+footer h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.2vw,38px);margin:0 0 8px;text-wrap:balance}
+footer p{margin:0;color:var(--muted)}
+.contact{display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:14px}
+.copy{display:flex;align-items:center;gap:10px}
+.copy code{user-select:all;font-family:var(--mono);color:var(--fg)}
+
+@media (max-width: 860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .photo{max-width:240px}
+  .item{grid-template-columns:1fr;gap:20px}
+  .ach .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ach div{border-bottom:1px solid var(--line)}
+  .games{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow-row{grid-template-columns:1fr;gap:6px}
+  .flow-row .arrow{padding:4px 0}
+  .door-head{grid-template-columns:1fr}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: no-preference){
+  .card,.btn,.nav a{transition:border-color .15s ease,color .15s ease}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">Ray<span>.</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#tech-art">Tech art</a>
+      <a href="#gameplay">Gameplay</a>
+      <a href="#backend">Backend</a>
+      <a href="#games">Games</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Technical artist &amp; gameplay programmer</p>
+        <h1>Muhammad Raya Ramadan <span class="soft">(Ray)</span></h1>
+        <p class="lede">I make games look good and run well, then write the code that holds them together. Co-founder of <em>A FAIR Studio</em> in Surabaya, Indonesia. Our games have shipped on Steam, Google Play and the App Store.</p>
+        <div class="links">
+          <a class="btn primary" href="#tech-art">See the work</a>
+          <a class="btn" href="https://github.com/rayakeren">GitHub</a>
+          <a class="btn" href="https://a-fair-studio.itch.io">Studio games</a>
+          <a class="btn" href="https://rayarekeren.itch.io">Solo games</a>
+          <a class="btn" href="https://linkedin.com/in/rayakren">LinkedIn</a>
+        </div>
+      </div>
+      <figure class="photo" style="margin:0">
+        <img src="img/ray.jpg" alt="Ray presenting at a podium" width="320" height="400">
+        <figcaption>Surabaya, Indonesia · UTC+7</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="ach" aria-label="Awards">
+    <div class="wrap">
+      <div><b>2nd Place</b><span>Gameseed 2026 · Little Mayor</span></div>
+      <div><b>1st Place + Best Visual</b><span>GIMERSIA 2025 · WING-IT</span></div>
+      <div><b>1st Place</b><span>KMIPN VII 2025 · Ice Tea Tycoon</span></div>
+      <div><b>Top 6</b><span>Gameseed 2025 · Logic Shield</span></div>
+      <div><b>Finalist</b><span>GEMASTIK XVIII · Zero One Protocol</span></div>
+    </div>
+  </div>
+
+  <!-- TECH ART -->
+  <section class="door" id="tech-art">
+    <div class="wrap">
+      <div class="door-head">
+        <div>
+          <h2>Tech art</h2>
+          <p>Lighting, shaders, VFX and the optimization work that keeps it all running on weak hardware.</p>
+        </div>
+        <span class="tag">Unity URP · HLSL · Shader Graph</span>
+      </div>
+
+      <article class="item">
+        <figure class="media" style="margin:0">
+          <div class="ba" id="ba-lm">
+            <div class="ba-before" aria-hidden="true">Unlit capture goes here</div>
+            <img src="img/lm-lit.jpg" alt="Little Mayor bedroom scene with baked lighting" style="clip-path:inset(0 0 0 var(--pos))">
+            <span class="ba-label l">BEFORE</span><span class="ba-label r">AFTER</span>
+            <span class="ba-line"></span>
+            <label for="ba-lm-range" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Compare before and after lighting</label>
+            <input type="range" id="ba-lm-range" min="0" max="100" value="50">
+          </div>
+          <figcaption>Drag to compare. Little Mayor, gameplay scene.</figcaption>
+        </figure>
+        <div class="notes">
+          <h3>Bedroom lighting rig</h3>
+          <p class="game">LITTLE MAYOR · 2026</p>
+          <p>The whole game takes place on a kid's bedroom floor, so the light has to feel like a real room at different times of day.</p>
+          <ul>
+            <li>Baked lighting with a skylight area fill and a warm volume profile</li>
+            <li>Day/night ambience pass, with menu and gameplay scenes rebaked to match</li>
+            <li>Kept cheap enough for the WebGL demo build</li>
+          </ul>
+          <div class="chips"><span class="chip">URP</span><span class="chip">Baked GI</span><span class="chip">Post-processing</span></div>
+          <div class="needs">Needs: an unlit or before capture of this view</div>
+        </div>
+      </article>
+
+      <article class="item">
+        <figure class="code">
+          <div class="code-head"><span>CelParticleUnlit.shader</span><span>HLSL · URP</span></div>
+<pre><code class="language-cpp">half4 Frag(Varyings input) : SV_Target
+{
+    half3 normalWS = normalize(input.normalWS);
+    half4 tint     = _BaseColor * input.color;
+
+    // Solid chunks: discard low-alpha fragments so depth stays clean
+    clip(tint.a - _Cutoff);
+
+    // Quantise NdotL into flat cel bands
+    Light mainLight = GetMainLight();
+    half  NdotL     = saturate(dot(normalWS, mainLight.direction));
+    half  bands     = max(_Bands, 1.0);
+    half  step      = (floor(NdotL * bands) + 0.5) / bands;
+    half  bandLevel = lerp(_ShadeStrength, 1.0, step);
+
+    half3 lit     = tint.rgb * mainLight.color * bandLevel;
+    half3 ambient = tint.rgb * SampleSH(normalWS) * _AmbientStrength;
+    return half4(lit + ambient, 1.0);
+}</code></pre>
+        </figure>
+        <div class="notes">
+          <h3>Cel-shaded clay puffs</h3>
+          <p class="game">LITTLE MAYOR · CUSTOM SHADER</p>
+          <p>Placing or demolishing a building throws out chunky "clay" dust. Soft alpha particles sorted badly when they stacked, so I wrote a shader that treats them as solid meshes instead.</p>
+          <ul>
+            <li>Alpha-clipped and depth-writing, so overlapping chunks sort per pixel</li>
+            <li>Light quantised into flat bands to match the toy look</li>
+            <li>Baked ambient (SH) mixed in so puffs sit in the room's light</li>
+            <li>Driven by a pooled VFX system to avoid spawn spikes</li>
+          </ul>
+          <div class="needs">Needs: a 5 sec clip of the dust and debris</div>
+        </div>
+      </article>
+
+      <article class="item">
+        <figure class="media" style="margin:0">
+          <img src="img/zo-scene.jpg" alt="Zero One Protocol: neon-lit lab with robots" loading="lazy">
+          <figcaption>Zero One Protocol, shipped on Steam, Google Play and the App Store.</figcaption>
+        </figure>
+        <div class="notes">
+          <h3>Mobile performance pass</h3>
+          <p class="game">ZERO ONE PROTOCOL · PC + MOBILE</p>
+          <p>The PC version's neon lighting had to survive on phones without losing the look.</p>
+          <ul>
+            <li>Occlusion culling and optimized level geometry across all levels</li>
+            <li>Baked lightmaps and reflection probes in place of real-time lights</li>
+            <li>Device-tier quality settings, mobile shadows off, Addressables for content</li>
+          </ul>
+          <div class="chips"><span class="chip">Lightmaps</span><span class="chip">Occlusion</span><span class="chip">Addressables</span></div>
+          <div class="needs">Needs: fps or draw-call numbers, before and after</div>
+        </div>
+      </article>
+
+      <article class="item">
+        <figure class="media" style="margin:0">
+          <div class="placeholder">Clip: fertilizer painting onto terrain</div>
+          <figcaption>Green Ops, an unfinished 3D vehicle sim.</figcaption>
+        </figure>
+        <div class="notes">
+          <h3>GPU terrain painting</h3>
+          <p class="game">GREEN OPS · PROTOTYPE</p>
+          <p>A truck sprays fertilizer and the ground visibly changes where it lands, painted on the GPU with normal and mask blending. Same project: custom glow outline shaders, spark and fog VFX.</p>
+          <div class="chips"><span class="chip">Render textures</span><span class="chip">Custom shaders</span><span class="chip">VFX</span></div>
+          <div class="needs">Needs: a short clip of the painting</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- GAMEPLAY -->
+  <section class="door" id="gameplay">
+    <div class="wrap">
+      <div class="door-head">
+        <div>
+          <h2>Gameplay &amp; systems</h2>
+          <p>Systems I built end to end in Unity and C#, from game feel to platform features.</p>
+        </div>
+        <span class="tag">C# · Unity 6 · Steamworks</span>
+      </div>
+
+      <article class="item">
+        <figure class="media" style="margin:0">
+          <img src="img/wi-play.jpg" alt="WING-IT gameplay: toy plane fighting saucers over felt hills" loading="lazy">
+          <figcaption>WING-IT. 1st Place and Best Visual, GIMERSIA 2025.</figcaption>
+        </figure>
+        <div class="notes">
+          <h3>Game feel, leaderboards, telemetry</h3>
+          <p class="game">WING-IT · STEAM</p>
+          <ul>
+            <li>Feedback system for hits, boss attacks and power-ups, built on Feel</li>
+            <li>Steam leaderboards: solo and co-op, speedrun, score and overall, per level, with avatars and an empty state</li>
+            <li>Bullet, hit and explosion VFX, plus audio, BGM playlists and subtitles</li>
+            <li>Local co-op second player</li>
+          </ul>
+          <div class="chips"><span class="chip">Steamworks.NET</span><span class="chip">Feel</span><span class="chip">DOTween</span></div>
+          <div class="needs">Needs: a 10 sec gameplay clip with hits and a boss</div>
+        </div>
+      </article>
+
+      <article class="item">
+        <figure class="media" style="margin:0">
+          <img src="img/cover-little-mayor.jpg" alt="Little Mayor cover art" loading="lazy" style="aspect-ratio:16/9">
+          <figcaption>Little Mayor. 2nd Place, Gameseed 2026. Shown at IGDX 2026.</figcaption>
+        </figure>
+        <div class="notes">
+          <h3>Voice, tutorial and save systems</h3>
+          <p class="game">LITTLE MAYOR · CITY BUILDER</p>
+          <ul>
+            <li>Kid voice-over system with priorities, shuffle bags and per-event cooldowns, so lines never repeat or talk over each other</li>
+            <li>Pooled SFX, crossfaded music and ambience, and an editor window for debugging audio</li>
+            <li>Lesson-based tutorial that decides per route whether a lesson waits its turn or gets dropped</li>
+            <li>Save system with thumbnails, roads, residents and wish progress</li>
+          </ul>
+          <div class="chips"><span class="chip">C#</span><span class="chip">Audio Mixer</span><span class="chip">Editor tools</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BACKEND -->
+  <section class="door" id="backend">
+    <div class="wrap">
+      <div class="door-head">
+        <div>
+          <h2>Backend &amp; online</h2>
+          <p>Servers and pipelines behind the games. Nobody sees this part, so here's how it works.</p>
+        </div>
+        <span class="tag">.NET 8 · FastAPI · PostgreSQL · Docker</span>
+      </div>
+
+      <article class="item">
+        <div class="stack">
+          <figure class="media" style="margin:0">
+            <div class="flow-row" role="img" aria-label="Project Ludo architecture: Unity client sends intents to a .NET 8 server which handles auth, matchmaking and authoritative match rules, deployed with Docker behind a reverse proxy">
+              <div class="node"><b>Unity client</b><span>shows the board<br>sends intents only:<br>RequestRoll, RequestMove</span></div>
+              <div class="arrow">realtime →<br>← state</div>
+              <div class="node hot"><b>.NET 8 server</b><span>guest auth + JWT<br>party + queue matchmaking<br>match service owns dice, moves, captures, coins<br>tile effect registry</span></div>
+              <div class="arrow">runs in</div>
+              <div class="node"><b>Deploy</b><span>Docker / Podman<br>reverse proxy<br>load tests with wrk</span></div>
+            </div>
+            <figcaption>Project Ludo: server-authoritative, turn-based multiplayer. The client never decides what's legal.</figcaption>
+          </figure>
+          <figure class="code">
+            <div class="code-head"><span>PortalEffect.cs</span><span>C# · server</span></div>
+<pre><code class="language-csharp">// New tile effects plug in without touching MatchState.
+public sealed class PortalEffect : ITileEffect
+{
+    private const int BlockThreshold = 2;
+    private readonly int _destinationIndex;
+
+    public string EffectType =&gt; "Portal";
+
+    public TileEffectOutcome Apply(TileEffectContext context)
+    {
+        var enemyCount = 0;
+        foreach (var occupancy in context.MainPathOccupancy)
+            if (occupancy.TileIndex == _destinationIndex
+                &amp;&amp; occupancy.PlayerSlot != context.PlayerSlotIndex)
+                enemyCount += occupancy.PawnCount;
+
+        if (enemyCount &gt;= BlockThreshold)
+            return new TileEffectOutcome(StayPut: true);
+
+        return new TileEffectOutcome(RedirectTo:
+            new PawnLocation(PawnLocationKind.MainPath, _destinationIndex));
+    }
+}</code></pre>
+          </figure>
+        </div>
+        <div class="notes">
+          <h3>Authoritative multiplayer server</h3>
+          <p class="game">PROJECT LUDO · IN DEVELOPMENT</p>
+          <p>A Ludo game with character abilities and special tiles, played online. I wrote the backend.</p>
+          <ul>
+            <li>The server rolls the dice, validates every move and resolves captures, coins and tile effects</li>
+            <li>Guest accounts with signed JWT tokens</li>
+            <li>Party and queue matchmaking for groups of 1 to 4</li>
+            <li>Client and server share one rules source, so they can't drift apart</li>
+            <li>Containerised deploy with a reverse proxy and load-test scripts</li>
+          </ul>
+          <div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">Docker</span><span class="chip">JWT</span></div>
+        </div>
+      </article>
+
+      <article class="item">
+        <figure class="code">
+          <div class="code-head"><span>main.py</span><span>Python · FastAPI</span></div>
+<pre><code class="language-python">@app.post("/events")
+async def ingest_events(request: Request):
+    body = await request.json()
+    events = body.get("events", [])
+    if not isinstance(events, list):
+        raise HTTPException(status_code=400, detail="events must be an array")
+
+    if engine:
+        with engine.begin() as conn:
+            for event in events:
+                conn.execute(text("""
+                    INSERT INTO telemetry_events
+                        (event_name, session_id, timestamp_utc, payload)
+                    VALUES (:event_name, :session_id, :timestamp_utc,
+                            CAST(:payload AS JSONB))
+                """), {
+                    "event_name": event.get("event_name", "unknown"),
+                    "session_id": event.get("session_id"),
+                    "timestamp_utc": event.get("timestamp_utc"),
+                    "payload": json.dumps(event),
+                })
+    return {"ok": True, "received": len(events)}</code></pre>
+        </figure>
+        <div class="notes">
+          <h3>Playtest telemetry pipeline</h3>
+          <p class="game">WING-IT · PLAYTESTING</p>
+          <p>We needed to know where players died and quit, not just what they told us.</p>
+          <ul>
+            <li>Unity side: a buffered telemetry service with consent, anonymous IDs, and context on damage, deaths and level entry</li>
+            <li>Server side: a FastAPI endpoint that batches events into PostgreSQL as JSONB</li>
+            <li>Output: playtest reports generated from the data</li>
+          </ul>
+          <div class="chips"><span class="chip">FastAPI</span><span class="chip">PostgreSQL</span><span class="chip">Railway</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section class="door" id="games">
+    <div class="wrap">
+      <div class="door-head">
+        <div>
+          <h2>Games</h2>
+          <p>Made with A FAIR Studio, a five-person team that started as a college project.</p>
+        </div>
+        <span class="tag">10 playable games</span>
+      </div>
+      <div class="games">
+        <a class="card" href="https://a-fair-studio.itch.io/little-mayor"><img src="img/cover-little-mayor.jpg" alt="Little Mayor cover" loading="lazy"><div><b>Little Mayor</b><span>City builder on a bedroom floor</span><span class="award">2nd · Gameseed 2026</span></div></a>
+        <a class="card" href="https://a-fair-studio.itch.io/wing-it"><img src="img/cover-wing-it.jpg" alt="WING-IT cover" loading="lazy"><div><b>WING-IT</b><span>Boss-rush shoot 'em up</span><span class="award">1st + Best Visual · GIMERSIA 2025</span></div></a>
+        <a class="card" href="https://a-fair-studio.itch.io"><img src="img/cover-zero-one.jpg" alt="Zero One Protocol capsule art" loading="lazy"><div><b>Zero One Protocol</b><span>Co-op logic puzzler, Steam + mobile</span><span class="award">Finalist · GEMASTIK XVIII</span></div></a>
+        <a class="card" href="https://a-fair-studio.itch.io/ice-tea-tycoon"><img src="img/cover-ice-tea-tycoon.jpg" alt="Ice Tea Tycoon cover" loading="lazy"><div><b>Ice Tea Tycoon</b><span>Street tea business sim</span><span class="award">1st · KMIPN VII 2025</span></div></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Looking for a remote internship.</h2>
+      <p>Tech art or gameplay programming. Happy to talk about any of the work above.</p>
+    </div>
+    <div class="contact">
+      <div class="copy"><code id="email">rayaramadan2005@gmail.com</code><button class="btn" type="button" id="copy-email">Copy</button></div>
+      <a href="https://linkedin.com/in/rayakren">linkedin.com/in/rayakren</a>
+      <a href="https://github.com/rayakeren">github.com/rayakeren</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+  // Before/after sliders
+  document.querySelectorAll('.ba').forEach(function (ba) {
+    var input = ba.querySelector('input[type=range]');
+    var set = function () { ba.style.setProperty('--pos', input.value + '%'); };
+    input.addEventListener('input', set); set();
+  });
+  // Syntax colours
+  if (window.hljs) { document.querySelectorAll('pre code').forEach(function (el) { window.hljs.highlightElement(el); }); }
+  // Copy email
+  var btn = document.getElementById('copy-email');
+  btn.addEventListener('click', function () {
+    var text = document.getElementById('email').textContent;
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(document.getElementById('email')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+</script>
+</body>
+</html>
