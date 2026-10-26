@@ -129,6 +129,21 @@ section.door{padding-block:88px 24px;scroll-margin-top:64px}
 .flow-row{display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1.3fr) 54px minmax(0,1fr);align-items:stretch;padding:18px;background:var(--surface);gap:0}
 .stack{display:flex;flex-direction:column;gap:8px}
 
+/* Architecture diagram (vertical) */
+.arch{display:flex;flex-direction:column;padding:18px;background:var(--surface)}
+.arch .node{padding:14px 16px}
+.arch .node > b{font-size:14px;margin-bottom:4px}
+.arch .node > p{margin:0;font-size:14px;color:var(--muted);line-height:1.5}
+.link{display:flex;align-items:stretch;gap:14px;padding-left:28px;min-height:52px}
+.link .line{position:relative;width:2px;background:var(--accent);flex-shrink:0}
+.link .line::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--accent);border-bottom:0}
+.link .lbl{align-self:center;font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.5;padding-block:8px}
+.mods{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.mods div{background:var(--raised);border:1px solid var(--line);border-radius:8px;padding:9px 11px;min-width:0}
+.mods b{display:block;font-family:var(--body);font-weight:600;font-size:13px;margin:0}
+.mods span{display:block;font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.45}
+.tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+
 /* Games */
 .games{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;color:var(--fg);text-decoration:none;min-width:0}
@@ -418,12 +433,19 @@ footer p{margin:0;color:var(--muted)}
       <article class="item">
         <div class="stack">
           <figure class="media" style="margin:0">
-            <div class="flow-row" role="img" aria-label="Project Ludo architecture: Unity client sends intents to a .NET 8 server which handles auth, matchmaking and authoritative match rules, deployed with Docker behind a reverse proxy">
-              <div class="node"><b>Unity client</b><span>shows the board<br>sends intents only:<br>RequestRoll, RequestMove</span></div>
-              <div class="arrow">realtime →<br>← state</div>
-              <div class="node hot"><b>.NET 8 server</b><span>guest auth + JWT<br>party + queue matchmaking<br>match service owns dice, moves, captures, coins<br>tile effect registry</span></div>
-              <div class="arrow">runs in</div>
-              <div class="node"><b>Deploy</b><span>Docker / Podman<br>reverse proxy<br>load tests with wrk</span></div>
+            <div class="arch" role="img" aria-label="Project Ludo architecture: the Unity client sends intents to a .NET 8 server, which runs auth, matchmaking, the match service and tile effects, and sends back authoritative state. The server is deployed with Docker or Podman behind a reverse proxy.">
+              <div class="node"><b>Unity client</b><p>Shows the board and plays the animations. Never decides what's legal.</p></div>
+              <div class="link"><span class="line"></span><span class="lbl">sends intents: RequestRoll, RequestMove<br>gets back: authoritative match state</span></div>
+              <div class="node hot"><b>.NET 8 server</b>
+                <div class="mods">
+                  <div><b>Auth</b><span>guest accounts, JWT</span></div>
+                  <div><b>Matchmaking</b><span>parties, queue of 1 to 4</span></div>
+                  <div><b>Match service</b><span>dice, moves, captures, coins</span></div>
+                  <div><b>Tile effects</b><span>plug-in registry</span></div>
+                </div>
+              </div>
+              <div class="link"><span class="line"></span><span class="lbl">deployed as</span></div>
+              <div class="node"><b>Deploy</b><div class="tools"><span class="chip">Docker / Podman</span><span class="chip">Reverse proxy</span><span class="chip">wrk load tests</span></div></div>
             </div>
             <figcaption>Project Ludo: server-authoritative, turn-based multiplayer. The client never decides what's legal.</figcaption>
           </figure>
