@@ -287,6 +287,11 @@ footer p{margin:0;color:var(--muted)}
       </article>
 
       <article class="item">
+        <div style="display:grid;gap:14px;align-content:start;min-width:0">
+        <figure class="media" style="margin:0">
+          <video src="media/lm-dust.mp4" poster="img/lm-dust-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Little Mayor clip: placing buildings throws out chunky cel-shaded clay puffs" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover"></video>
+          <figcaption>Little Mayor. Clay puffs when a building lands.</figcaption>
+        </figure>
         <figure class="code">
           <div class="code-head"><span>CelParticleUnlit.shader</span><span>HLSL · URP</span></div>
 <pre><code class="language-cpp">half4 Frag(Varyings input) : SV_Target
@@ -309,6 +314,7 @@ footer p{margin:0;color:var(--muted)}
     return half4(lit + ambient, 1.0);
 }</code></pre>
         </figure>
+        </div>
         <div class="notes">
           <h3>Cel-shaded clay puffs</h3>
           <p class="game">LITTLE MAYOR · CUSTOM SHADER</p>
@@ -319,7 +325,6 @@ footer p{margin:0;color:var(--muted)}
             <li>Baked ambient (SH) mixed in so puffs sit in the room's light</li>
             <li>Driven by a pooled VFX system to avoid spawn spikes</li>
           </ul>
-          <div class="needs">Needs: a 5 sec clip of the dust and debris</div>
         </div>
       </article>
 
